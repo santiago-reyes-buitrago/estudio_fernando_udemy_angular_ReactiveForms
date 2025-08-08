@@ -1,3 +1,9 @@
-<h1>Hola mundo</h1>
-<side-menu/>
-<router-outlet />
+<header class="row mt-5">
+  <h1>{{'Hola mundo' | titlecase}}</h1>
+  <side-menu/>
+</header>
+<main class="row">
+  <section class="col-12 col-sm-6">
+    <router-outlet />
+  </section>
+</main>

@@ -1,1 +1,37 @@
-<p>side-menu works!</p>
+<nav class="navbar bg-body-tertiary">
+  <section class="container-fluid">
+    <h3>Reactive routes</h3>
+    <ul class="list-group">
+      @for (item of reactiveItems; track item.route){
+        <li class="list-group-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+        >
+          {{item.title}}
+        </li>
+      }
+    </ul>
+    <h3>Auth routes</h3>
+    <ul class="list-group">
+      @for (item of authMenu; track item.route){
+        <li class="list-group-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+        >
+          {{item.title}}
+        </li>
+      }
+    </ul>
+    <h3>Country routes</h3>
+    <ul class="list-group">
+      @for (item of countryMenu; track item.route){
+        <li class="list-group-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+        >
+          {{item.title}}
+        </li>
+      }
+    </ul>
+  </section>
+</nav>

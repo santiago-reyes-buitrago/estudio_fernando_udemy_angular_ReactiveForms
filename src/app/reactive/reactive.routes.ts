@@ -3,8 +3,7 @@ import {BasicPage} from './pages/basic-page/basic-page';
 import {DynamicPage} from './pages/dynamic-page/dynamic-page';
 import {SwitchesPage} from './pages/switches-page/switches-page';
 
-
-export  const countryRoutes:Routes = [
+const ractiveRoutes:Routes = [
   {
     path: '',
     children: [
@@ -30,3 +29,5 @@ export  const countryRoutes:Routes = [
     ]
   }
 ]
+
+export default ractiveRoutes;
