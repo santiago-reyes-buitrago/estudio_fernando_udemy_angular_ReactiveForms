@@ -19,9 +19,31 @@ export class BasicPage {
   // })
   private fb = inject(FormBuilder)
 
-  myForm = this.fb.group({
+  myForm: FormGroup = this.fb.group({
     name: ['',[Validators.required,Validators.minLength(3)]],
-    price: [,[Validators.required,Validators.min(10)],],
-    inStorage: [,Validators.required,Validators.min(0)]
+    price: [,[Validators.required,Validators.min(100)],],
+    inStorage: [,Validators.required,Validators.min(10)]
   })
+
+
+  isValidFile(fieldName: string):boolean | null {
+    return !!this.myForm.controls[fieldName].errors;
+  }
+
+  getFieldError(fieldName: string):string | null {
+    if (!this.myForm.controls[fieldName]) return null;
+    const errors = this.myForm.controls[fieldName].errors ?? {};
+
+    for ( const key of Object.keys(errors)){
+      switch (key) {
+        case 'minlength':
+          return `Este Campo requiere un minimo de ${errors['minlength'].requiredLength} caracteres`;
+        case 'min':
+          return `Este Campo requiere un minimo de ${errors['min'].min}`;
+        case 'required':
+          return 'Este campo es requerido';
+      }
+    }
+    return null;
+  }
 }
