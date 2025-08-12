@@ -1,14 +1,16 @@
 <h2>Reactivos: <small> Dinámicos </small></h2>
 <hr>
 
-<form autocomplete="off">
+<form autocomplete="off" [formGroup]="myForm">
 
   <!-- Nombre -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
     <div class="col-sm-9">
       <input class="form-control"
-             placeholder="Nombre de la persona">
+             placeholder="Nombre de la persona"
+             formControlName="name"
+      >
       <span class="form-text text-danger">
                    error message
             </span>
@@ -37,24 +39,24 @@
   <!-- Lista de Juegos Favoritos -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favoritos</label>
-    <div class="col-sm-9">
+    <div class="col-sm-9" formArrayName="favoriteGames">
+      @for (favoriteGame of favoriteGames.controls; track $index; let i = $index){
+        <div class="mb-1">
 
-      <div class="mb-1">
+          <div class="input-group">
+            <input class="form-control" [formControlName]="i">
 
-        <div class="input-group">
-          <input class="form-control">
-
-          <button class="btn btn-outline-danger"
-                  type="button">
-            Eliminar
-          </button>
-        </div>
-        <span class="form-text text-danger">
+            <button class="btn btn-outline-danger"
+                    type="button">
+              Eliminar
+            </button>
+          </div>
+          <span class="form-text text-danger">
                    Este campo es requerido
                 </span>
 
-      </div>
-
+        </div>
+      }
     </div>
   </div>
 
@@ -77,11 +79,11 @@
 
 
 <span>Valid</span>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.valid | json }}</pre>
 <br>
 
 <span>Value</span>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.value | json }}</pre>
 <br>
 
 <span>Agregar Juego</span>

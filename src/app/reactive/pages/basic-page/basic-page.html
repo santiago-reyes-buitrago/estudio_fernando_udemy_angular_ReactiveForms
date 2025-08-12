@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col">
 
-    <form autocomplete="off" [formGroup]="myForm">
+    <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="handleSubmit()">
 
       <!-- Campo de producto -->
       <div class="mb-3 row">
@@ -17,10 +17,10 @@
                  formControlName="name"
           >
 
-          @if (isValidFile('name')) {
+          @if (formUtils.isValidFile('name',myForm)) {
             <span class="form-text text-danger">
                         <!-- Debe de ser de 3 letras -->
-                        {{getFieldError('name')}}
+                        {{formUtils.getFieldError('name',myForm)}}
                     </span>
           }
         </div>
@@ -35,10 +35,10 @@
                  placeholder="Precio del producto"
                  formControlName="price"
           >
-          @if (isValidFile('price')) {
+          @if (formUtils.isValidFile('price',myForm)) {
             <span class="form-text text-danger">
                         <!-- Debe de ser de 3 letras -->
-              {{getFieldError('price')}}
+              {{formUtils.getFieldError('price',myForm)}}
                     </span>
           }
         </div>
@@ -53,10 +53,10 @@
                  placeholder="Existencias del producto"
                  formControlName="inStorage"
           >
-          @if (isValidFile('inStorage')) {
+          @if (formUtils.isValidFile('inStorage',myForm)) {
             <span class="form-text text-danger">
                         <!-- Debe de ser de 3 letras -->
-              {{getFieldError('inStorage')}}
+              {{formUtils.getFieldError('inStorage',myForm)}}
                     </span>
           }
         </div>
