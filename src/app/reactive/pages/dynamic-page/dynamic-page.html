@@ -11,9 +11,12 @@
              placeholder="Nombre de la persona"
              formControlName="name"
       >
-      <span class="form-text text-danger">
-                   error message
-            </span>
+      @if (formUtils.isValidFile('name', myForm)) {
+        <span class="form-text text-danger">
+                        <!-- Debe de ser de 3 letras -->
+          {{ formUtils.getFieldError('name', myForm) }}
+                    </span>
+      }
     </div>
   </div>
 
@@ -24,11 +27,14 @@
 
       <div class="input-group">
         <input class="form-control"
-               placeholder="Agregar favorito">
+               placeholder="Agregar favorito"
+               [formControl]="newFavoriteGame"
+               (keydown.enter)="onAddToFavorites()"
+        >
 
 
         <button class="btn btn-outline-primary"
-                type="button">
+                type="button" (click)="onAddToFavorites()">
           Agregar favorito
         </button>
       </div>
@@ -40,31 +46,37 @@
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favoritos</label>
     <div class="col-sm-9" formArrayName="favoriteGames">
-      @for (favoriteGame of favoriteGames.controls; track $index; let i = $index){
+      @for (favoriteGame of favoriteGames.controls; track $index; let i = $index) {
         <div class="mb-1">
 
           <div class="input-group">
             <input class="form-control" [formControlName]="i">
-
             <button class="btn btn-outline-danger"
+                    (click)="onRemoveFromFavorites(i)"
                     type="button">
               Eliminar
             </button>
           </div>
-          <span class="form-text text-danger">
-                   Este campo es requerido
+          @if (formUtils.isValidFieldArray(favoriteGames, i)) {
+            <span class="form-text text-danger">
+              {{ formUtils.getFieldErrorArray(i, favoriteGames) }}
                 </span>
-
+          }
         </div>
+      }
+      @if (formUtils.isValidFile('favoriteGames', myForm)) {
+        <span class="form-text text-danger">
+              {{ formUtils.getFieldError('favoriteGames', myForm) }}
+                </span>
       }
     </div>
   </div>
 
 
-
   <div class="row">
     <div class="col-sm-12">
       <button type="submit"
+              [disabled]="myForm.invalid"
               class="btn btn-primary float-end"
       >
         <!-- [disabled]="myForm.invalid" -->
@@ -75,7 +87,6 @@
 
 
 </form>
-
 
 
 <span>Valid</span>
