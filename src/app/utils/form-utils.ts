@@ -3,7 +3,8 @@ import {FormArray, FormGroup} from '@angular/forms';
 const errorsObject: Record<string, Function> = {
   'minlength': (errors:any) => `Este Campo requiere un minimo de ${errors['minlength'].requiredLength} caracteres`,
   'min': (errors:any) => `Este Campo requiere un minimo de ${errors['min'].min}`,
-  'required': (errors:any) => `Este campo es requerido`
+  'required': (errors:any) => `Este campo es requerido`,
+  'email': (errors:any) => `Este campo deber ser un email valido`
 }
 export class FormUtils {
 
